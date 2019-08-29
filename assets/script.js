@@ -19,7 +19,8 @@ var Eliwood = {
 
 var allChars = [Hector, Lynn, Eliwood];
 var enemyChoices = []
-var attacker;
+var attacker, defender;
+var combatPhase = false;
 
 $(document).ready(function() {
     // Render Characters to Char Select Function
@@ -47,6 +48,31 @@ $(document).ready(function() {
         }
 
         $("#chara-select-area").html("")
+    })
+
+    $(document).on("click", ".select-defender", function() {
+        if (!combatPhase) {
+            
+            let clickedElement = $(this)
+            var name = clickedElement.attr("name");
+            defender = getObject(name);
+
+            renderChara(defender, "defender")
+            // Remove defender from enemies
+            console.log(enemyChoices)
+            enemyChoices.splice(enemyChoices.indexOf(defender), 1)
+            console.log(enemyChoices)
+            // Rerender Enemies array
+
+            $("#enemy-select-area").html("")
+
+            for (let i = 0; i < enemyChoices.length; i++) {
+                let enemy = enemyChoices[i];
+                renderChara(enemy, "defOption")
+            }
+
+            combatPhase = true;
+        }
     })
 
 })
@@ -77,7 +103,9 @@ function renderChara(chara, type) {
             destination.append(element);
             break;
         case "defender":
-        
+            element.addClass("defender")
+            var destination = $('#defender-area');
+            destination.append(element);
             break;
         default:
             break;
