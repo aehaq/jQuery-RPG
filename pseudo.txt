@@ -1,0 +1,45 @@
+IN HTML 
+    Character Select Area
+    Attacker (Selected Character) Area
+    Enemy Select Area
+    Fight Section
+    Defender (Enemy Selected) Area
+
+
+IN JAVASCRIPT
+    Create three fighters for the player to choose from
+        Fighters have Health
+        Fighters have Attack Rating
+
+    Create three enemies for your fighter to attack
+        Enemy has Health
+        Enemy has counterAttack Rating
+
+    set combat state
+
+    set enemiesRemaining
+
+    on page load
+        Render character choices in Character Select Area
+        on Character Select
+            Remove Characters from select area
+            Append Character to character selected area
+            add enemies available to enemy select area
+        on enemySelect
+            if not already inCombat
+                set combat to true
+                remove selected character from enemySelect area and enemiesRemaining
+        on attackButtonClick
+            lower health attribute of enemy by player attack Rating
+                display enemy health
+                raise user attack Rating
+                if enemy health is less than 0,
+                    Remove enemy 
+                    exit combat state
+                else
+                    lower health attribute of player by enemy counterAttack
+                    display player health
+                    if player Health is less than 0
+                        display Game Over
+
+
