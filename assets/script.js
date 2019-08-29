@@ -160,6 +160,9 @@ function init() {
     attacker = undefined; 
     defender = undefined;
     combatPhase = false;
+    $('#attacker-area').html("")
+    $('#defender-area').html("")
+    $('#enemy-select-area').html("")
     for(var i=0; i < allChars.length; i++) {
         renderChara(allChars[i], "atkOption")
     }
