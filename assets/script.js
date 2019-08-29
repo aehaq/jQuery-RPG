@@ -1,33 +1,19 @@
-var Hector = {
-    name: "Hector",
-    hp: 120,
-    atk: 7,
-    counter: 7
+function Character(name, hp, atk, baseAtk, counter) {
+    this.name = name;
+    this.hp = hp;
+    this.atk = atk;
+    this.baseAtk = baseAtk;
+    this.counter = counter;
 }
-var Lynn = {
-    name: "Lynn",
-    hp: 80,
-    atk: 12,
-    counter: 12
-}
-var Eliwood = {
-    name: "Eliwood",
-    hp: 100,
-    atk: 9,
-    counter: 9
-}
-
-var allChars = [Hector, Lynn, Eliwood];
 var enemyChoices = []
 var attacker, defender;
 var combatPhase = false;
 
 $(document).ready(function() {
     // Render Characters to Char Select Function
-    for(var i=0; i < allChars.length; i++) {
-        renderChara(allChars[i], "atkOption")
-    }
+    init();
 
+    // When the player selects a character from the top of the screen
     $(document).on("click", ".select-char", function() {
         let clickedElement = $(this)
         var name = clickedElement.attr("name")
@@ -50,7 +36,9 @@ $(document).ready(function() {
         $("#chara-select-area").html("")
     })
 
+    // When the player selects a defender
     $(document).on("click", ".select-defender", function() {
+        // Only run when not in combat phase
         if (!combatPhase) {
             
             let clickedElement = $(this)
@@ -75,6 +63,41 @@ $(document).ready(function() {
         }
     })
 
+    $('#attack-button').on("click", function(event) {
+        if (combatPhase) {
+
+            defender.hp -= attacker.atk;
+            attacker.atk += attacker.baseAtk;
+            $('#defender-area').html("")
+            
+            if (defender.hp < 1) {
+                // remove enemy and game state
+                combatPhase = false;
+                if (enemyChoices.length > 0) {
+                    alert("ENEMY DEFEATED \n Choose your next opponent")
+                } else {
+                    alert("CONGRATULATIONS \n All enemies have been vanquished")
+                    $('#attacker-area').html("")
+                    init()
+                }
+                
+            } else {
+                // Render Defender with new HP
+                renderChara(defender, "defender");
+                
+                attacker.hp -= defender.counter;
+                $('#attacker-area').html("")
+                renderChara(attacker, "attacker");
+
+                if (attacker.hp < 1) {
+                    $('#defender-area').html("")
+                    alert("GAME OVER")
+                    init()
+                }
+            }
+        }
+    })
+
 })
 
 function renderChara(chara, type) {
@@ -82,9 +105,10 @@ function renderChara(chara, type) {
     var element = $("<button>");
     element.attr('hp', chara.hp);
     element.attr('atk', chara.atk);
-    element.attr('counter', chara.counter)
-    element.attr('name', chara.name)
-    element.html(`${chara.name} <br></br> HP: ${chara.hp}`)
+    element.attr('baseAtk', chara.baseAtk);
+    element.attr('counter', chara.counter);
+    element.attr('name', chara.name);
+    element.html(`${chara.name} <br></br> HP: ${chara.hp}`);
 
     switch (type) {
         case "atkOption":
@@ -118,5 +142,20 @@ function getObject(name) {
         if (allChars[i].name === name) {
             return allChars[i];
         }            
+    }
+}
+
+function init() {
+    var Lynn = new Character("Lynn", 100, 30, 30, 15);
+    var Hector = new Character("Hector", 300, 10, 10, 5);
+    var Eliwood = new Character("Eliwood", 120, 25, 25, 35);
+    var Marth = new Character("Marth", 250, 1, 10, 20);
+    allChars = [Hector, Lynn, Eliwood, Marth];
+    enemyChoices = []
+    attacker = undefined; 
+    defender = undefined;
+    combatPhase = false;
+    for(var i=0; i < allChars.length; i++) {
+        renderChara(allChars[i], "atkOption")
     }
 }
