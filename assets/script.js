@@ -114,21 +114,25 @@ function renderChara(chara, type) {
     switch (type) {
         case "atkOption":
             element.addClass("select-char")
+            element.addClass("btn-info");
             var destination = $('#chara-select-area');
             destination.append(element);
             break;
         case "defOption":
             element.addClass("select-defender")
+            element.addClass("btn-info");
             var destination = $('#enemy-select-area');
             destination.append(element);
             break;
         case "attacker":
             element.addClass("attacker")
+            element.addClass("btn-success");
             var destination = $('#attacker-area');
             destination.append(element);
             break;
         case "defender":
             element.addClass("defender")
+            element.addClass("btn-warning");
             var destination = $('#defender-area');
             destination.append(element);
             break;
