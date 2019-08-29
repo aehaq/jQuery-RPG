@@ -90,8 +90,9 @@ $(document).ready(function() {
                 renderChara(attacker, "attacker");
 
                 if (attacker.hp < 1) {
-                    $('#defender-area').html("")
+                    $('#attacker-area').html("")
                     alert("GAME OVER")
+                    $('#defender-area').html("")
                     init()
                 }
             }
@@ -146,10 +147,10 @@ function getObject(name) {
 }
 
 function init() {
-    var Lynn = new Character("Lynn", 100, 30, 30, 15);
-    var Hector = new Character("Hector", 300, 10, 10, 5);
-    var Eliwood = new Character("Eliwood", 120, 25, 25, 35);
-    var Marth = new Character("Marth", 250, 1, 10, 20);
+    var Lynn = new Character("Lynn", 100, 8, 8, 22);
+    var Hector = new Character("Hector", 300, 2, 2, 12);
+    var Eliwood = new Character("Eliwood", 120, 6, 6, 16);
+    var Marth = new Character("Marth", 250, 4, 4, 14);
     allChars = [Hector, Lynn, Eliwood, Marth];
     enemyChoices = []
     attacker = undefined; 
