@@ -17,23 +17,37 @@ var Eliwood = {
     counter: 9
 }
 
-var choicesArray = [Hector, Lynn, Eliwood];
+var allChars = [Hector, Lynn, Eliwood];
+var enemyChoices = []
+var attacker;
 
 $(document).ready(function() {
     // Render Characters to Char Select Function
-    for(var i=0; i < choicesArray.length; i++) {
-        renderChara(choicesArray[i], "atkOption")
+    for(var i=0; i < allChars.length; i++) {
+        renderChara(allChars[i], "atkOption")
     }
 
-    // $(document).on("click", ".select-char", function(event) {
-        
-    //     var choice = $(this);
+    $(document).on("click", ".select-char", function() {
+        let clickedElement = $(this)
+        var name = clickedElement.attr("name")
+        attacker = getObject(name);
 
-    //     renderChara()
+        for (var i=0; i< allChars.length; i++) {
+            let character = allChars[i];
+            if (character != attacker) {
+                enemyChoices.push(character);
+            }
+        }
 
-    // })
+        renderChara(attacker, "attacker");
 
+        for (let i = 0; i < enemyChoices.length; i++) {
+            let enemy = enemyChoices[i];
+            renderChara(enemy, "defOption")
+        }
 
+        $("#chara-select-area").html("")
+    })
 
 })
 
@@ -53,15 +67,28 @@ function renderChara(chara, type) {
             destination.append(element);
             break;
         case "defOption":
-        
+            element.addClass("select-defender")
+            var destination = $('#enemy-select-area');
+            destination.append(element);
             break;
         case "attacker":
-        
+            element.addClass("attacker")
+            var destination = $('#attacker-area');
+            destination.append(element);
             break;
         case "defender":
         
             break;
         default:
             break;
+    }
+}
+
+
+function getObject(name) {
+    for (let i = 0; i < allChars.length; i++) {
+        if (allChars[i].name === name) {
+            return allChars[i];
+        }            
     }
 }
