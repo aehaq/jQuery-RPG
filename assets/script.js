@@ -1,3 +1,4 @@
+// Constructor for characters
 function Character(name, hp, atk, baseAtk, counter) {
     this.name = name;
     this.hp = hp;
@@ -9,16 +10,19 @@ var enemyChoices = []
 var attacker, defender;
 var combatPhase = false;
 
+// When the page has loaded
 $(document).ready(function() {
     // Render Characters to Char Select Function
     init();
 
     // When the player selects a character from the top of the screen
     $(document).on("click", ".select-char", function() {
+        // Identify the attacker chosen
         let clickedElement = $(this)
         var name = clickedElement.attr("name")
         attacker = getObject(name);
 
+        // create an array of available enemies
         for (var i=0; i< allChars.length; i++) {
             let character = allChars[i];
             if (character != attacker) {
@@ -47,25 +51,25 @@ $(document).ready(function() {
 
             renderChara(defender, "defender")
             // Remove defender from enemies
-            console.log(enemyChoices)
             enemyChoices.splice(enemyChoices.indexOf(defender), 1)
-            console.log(enemyChoices)
-            // Rerender Enemies array
 
+            // Resets and rerenders enemies available to select
             $("#enemy-select-area").html("")
-
             for (let i = 0; i < enemyChoices.length; i++) {
                 let enemy = enemyChoices[i];
                 renderChara(enemy, "defOption")
             }
 
+            // Combat phase begins when there is both an attacker and defender available
             combatPhase = true;
         }
     })
 
-    $('#attack-button').on("click", function(event) {
+    // When the attack button is clicked
+    $('#attack-button').on("click", function() {
+        // Attack button only functions if combatphase has begun
         if (combatPhase) {
-
+            // Player Attacks the Defender, and their attack score raises
             defender.hp -= attacker.atk;
             attacker.atk += attacker.baseAtk;
             $('#defender-area').html("")
@@ -85,7 +89,10 @@ $(document).ready(function() {
                 // Render Defender with new HP
                 renderChara(defender, "defender");
                 
+                // Defender counterattacks character
                 attacker.hp -= defender.counter;
+
+                //rerenders attacker
                 $('#attacker-area').html("")
                 renderChara(attacker, "attacker");
 
@@ -141,7 +148,7 @@ function renderChara(chara, type) {
     }
 }
 
-
+// A function for retriving the character object by using their name.
 function getObject(name) {
     for (let i = 0; i < allChars.length; i++) {
         if (allChars[i].name === name) {
@@ -151,6 +158,7 @@ function getObject(name) {
 }
 
 function init() {
+    // Resets characters and their roles
     var Lynn = new Character("Lynn", 100, 8, 8, 22);
     var Hector = new Character("Hector", 300, 2, 2, 12);
     var Eliwood = new Character("Eliwood", 120, 6, 6, 16);
@@ -159,10 +167,16 @@ function init() {
     enemyChoices = []
     attacker = undefined; 
     defender = undefined;
+
+    // Makes sure combat phase is off
     combatPhase = false;
+
+    //Empties enemy, attacker and defender div
     $('#attacker-area').html("")
     $('#defender-area').html("")
     $('#enemy-select-area').html("")
+
+    //renders characters into character select div
     for(var i=0; i < allChars.length; i++) {
         renderChara(allChars[i], "atkOption")
     }
