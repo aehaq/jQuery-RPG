@@ -8,56 +8,57 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="bg-secondary">
-    <h1 class="jumbotron">RPG Game</h1>
-    
     <div class="container justify-content-center">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-8">
-                <div class="card bg-light">
-                    <h2 class="card-title">Character Select</h2>
-                    <div id="chara-select-area"></div>
-                </div>
-            </div>
-            <div class="col"></div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-8">
-                <div class="card bg-light">
-                    <h2 class="card-title">Enemy Select</h2>
-                    <div id="enemy-select-area"></div>
-                </div>
-            </div>
-            <div class="col"></div>
-        </div>
-        <br />
-        <div class="row">
-            <h1>INITIATE COMBAT:  </h1> <button class="btn-danger" id="attack-button"> Attack! </button>
-        </div>
-        <br />
 
+        <div class="jumbotron text-center">
+            <h1>  RPG Game</h1>
+
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-8 text-center">
+                    <div class="card bg-light">
+                        <h2 class="card-title">Character Select</h2>
+                        <div id="chara-select-area"></div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-8 text-center">
+                    <div class="card bg-light">
+                        <h2 class="card-title">Enemy Select</h2>
+                        <div id="enemy-select-area"></div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    
         <div class="row">
-            <div class="col"></div>
-            <div class="col-8">    
+            <div class="col text-center">
+                <h1>Combat Arena </h1> 
+
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col text-center">
                 <div class="card bg-light">
-                    <h2 class="card-title">Attacker: </h2>
+                    <h2 class="card-title">Attacker </h2>
                     <div id="attacker-area"> </div>
                 </div>
             </div>
-            <div class="col"></div>
-        </div>
-        <br />        
-        <div class="row">
-            <div class="col"></div>
-            <div class="col-8">    
+            <div class="col text-center">    
+                    <button class="btn btn-danger btn-lg" id="attack-button"> Attack! </button>
+            </div>
+            <div class="col text-center">
                 <div class="card bg-light">
-                    <h2 class="card-title">Defender: </h2>
+                    <h2 class="card-title">Defender </h2>
                     <div id="defender-area"> </div>
                 </div>
             </div>
-            <div class="col"></div>
         </div>
         
     </div>
